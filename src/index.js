@@ -34,7 +34,7 @@ function removeTask(e) {
 }
 
 function sortTasks(taskList) {
-  let lastHigh = 0;
+  let lastHigh = -1;
   // console.log(taskList.length);
   // console.log(taskList);
   // console.log(taskList.getElementsByClassName('high')[0].textContent);
@@ -42,22 +42,27 @@ function sortTasks(taskList) {
   // console.log(taskList.querySelectorAll('li'));
   // console.log(taskList.querySelectorAll('li').length);
   const taskItems = taskList.querySelectorAll('li').length;
+  let theList = taskList.childNodes;
+  console.log(theList);
   let lastItem = taskList.querySelectorAll('li')[taskItems - 1];
   let lastItemPriority = lastItem.className;
-  console.log(lastItem);
-  console.log(lastItemPriority);
+  //console.log(lastItem);
+  //console.log(lastItemPriority);
   if (taskItems === 1) {
     return;
   } else if (taskItems > 1 && lastItemPriority === '2') {
-    taskList.querySelectorAll('li').forEach(element => {
+    theList.forEach(element => {
       if (element.className === '1') {
         lastHigh++;
         //console.log(`lastHigh: ${lastHigh}`);
-
       }
+      //console.log(`lasthigh: ${lastHigh}`);
       // pop - run first to remove last element
       // splice - (start, deletecount [put 0], item) 
       // console.log(element.className);
     });
+    theList.pop();
+    theList.splice(lastHigh, 0, lastItem);
+    console.log(theList);
   }
 }
